@@ -1,0 +1,3 @@
+Upload file that you wish to run on boot -:
+
+    ampy --delay 1 --port /dev/cu.usbserial-0001 put demo.py /main.py 
