@@ -1,8 +1,9 @@
+import config
 import functions
 from machine import Pin
 from time import sleep
 
-wifi = functions.connect_to_wifi()
+wifi = functions.connect_to_wifi(config.ssid, config.password)
 # Print out the network configuration received from DHCP
 print('network config:', wifi.ifconfig())
 
