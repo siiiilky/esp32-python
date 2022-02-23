@@ -13,39 +13,6 @@ print('network config:', wifi.ifconfig())
 relay1 = Pin(22, Pin.OUT)
 # Create an output pin on GPIO 23
 relay2 = Pin(23, Pin.OUT)
-def web_page():
-    if relay1.value() == 1:
-        relay1_state = "ON"
-    else:
-        relay1_state = "OFF"
-    if relay2.value() == 1:
-        relay2_state = "ON"
-    else:
-        relay2_state = "OFF"
-
-    html = """<html>
-      <head> 
-        <title>MicroPython Web Server</title> 
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" href="data:,">
-        <style>html{font-family: Helvetica; display:inline-block; margin: 0px auto; text-align: center;} h1{color: #0F3376; padding: 2vh;}p{font-size: 1.5rem;}.button{display: inline-block; background-color: #006400; border: none; border-radius: 4px; color: white; padding: 16px 40px; text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}.button2{background-color: #dc143c;}</style>
-      </head>
-      <body> 
-        <h1>MicroPython Web Server</h1> 
-        <p>Relay 1 state: <strong>""" + relay1_state + """</strong></p>
-        <p>
-          <a href="/?relay1=on"><button class="button">ON</button></a>
-          <a href="/?relay1=off"><button class="button button2">OFF</button></a>
-        </p>
-        <p>Relay 2 state: <strong>""" + relay2_state + """</strong></p>
-        <p>
-          <a href="/?relay2=on"><button class="button">ON</button></a>
-          <a href="/?relay2=off"><button class="button button2">OFF</button></a>
-        </p>
-      </body>
-    </html>"""
-    return html
-
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind(('', 80))
 s.listen(5)
@@ -72,7 +39,7 @@ while True:
     if relay2_off == 6:
         print('Relay 2 OFF')
         relay2.value(0)
-    response = web_page()
+    response = functions.web_page(relay1, relay2)
     conn.send('HTTP/1.1 200 OK\n')
     conn.send('Content-Type: text/html\n')
     conn.send('Connection: close\n\n')
