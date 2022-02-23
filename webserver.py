@@ -5,17 +5,14 @@ try:
   import usocket as socket
 except:
   import socket
-from time import sleep
 
 wifi = functions.connect_to_wifi(config.ssid, config.password)
 # Print out the network configuration received from DHCP
 print('network config:', wifi.ifconfig())
-
-# ESP32 GPIO 22
+# Create an output pin on GPIO 22
 relay1 = Pin(22, Pin.OUT)
-# ESP32 GPIO 23
+# Create an output pin on GPIO 23
 relay2 = Pin(23, Pin.OUT)
-
 def web_page():
     if relay1.value() == 1:
         relay1_state = "ON"
