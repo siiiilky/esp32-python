@@ -1,3 +1,8 @@
 ssid='ssidname'
 password='password'
+mqtt_server="192.168.1.1"
+mqtt_port="1883"
+mqtt_user="homeassistant"
+mqtt_password="supersecretpassword"
+mqtt_topic_sub=b'garagedoor'
 
