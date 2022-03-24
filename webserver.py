@@ -13,13 +13,18 @@ print('network config:', wifi.ifconfig())
 relay1 = Pin(22, Pin.OUT)
 # Create an output pin on GPIO 23
 relay2 = Pin(23, Pin.OUT)
+# Create a socket we will use for webserver
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# Bind this socket to port 80
 s.bind(('', 80))
+# Listen on the socket
 s.listen(5)
 
 while True:
+    # Accept a connection on port 80
     conn, addr = s.accept()
     print('Got a connection from %s' % str(addr))
+    # Recieve a request from the client
     request = conn.recv(1024)
     request = str(request)
     print('Content = %s' % request)
